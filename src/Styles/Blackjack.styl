@@ -1,0 +1,113 @@
+.blackjack {
+  position: relative;
+  margin: rem(16);                                          // Rem Calc Function
+  padding: rem(16);
+  background: $felt-table-top;                                       // Color variables
+  gameFont();                                                // Font Stack Mixin
+
+  p {
+    font-size: rem(40);
+  }
+
+  button {
+    margin: rem(8)
+  }
+
+  .button-logout {
+    position: absolute;
+    top: rem(8);
+    left: rem(8);
+  }
+
+  .button-mute {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 2em;
+    background: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .player-stats {
+    position: absolute
+    top: rem(8);
+    right: rem(8);
+    line-height: 2;
+  }
+
+  .blackjack__inner-wrap {
+    text-align: center;
+
+    .message-container {
+      flexContainer(false, true, 'column');                // Flex Container Mixin
+      position: relative;
+      margin: rem(15) auto;
+      padding: rem(20);
+      border-radius: 5px;
+      background: $white;
+      max-width: 45%;
+
+      > h1,
+      > h2 {
+        flexItem();                                             // Flex Item mixin
+        gameTextFont();
+      }
+
+      &::before {
+        arrow(                                                      // Arrow mixin
+          arrowDirection: 'top',
+          arrowHeight: 10px,
+          arrowWidth: 16px,
+          color: $white,
+          positioned: true
+        );
+      }
+    }
+
+    .outerspace {
+      flexContainer(true);
+      margin: initial;
+      padding: initial;
+      border-radius: initial;
+      background: none;
+
+      &::before {
+        display: none;
+      }
+
+      .spacheman {
+        font-size: 3em
+        cursor: pointer;
+        user-select: none;
+        transition: transform 250ms ease;
+        transform: scale(1);
+        transition-delay: 3400ms;
+
+        &:hover {
+          transform: scale(0);
+
+          & + .rocket {
+            left: 55vw;
+            top: -10vh;
+          }
+        }
+      }
+
+      .rocket {
+        left: 0vw;
+        top: 110vh;
+        z-index: 1;
+        color: black;                                     // Satisfies aXe warning
+        position: fixed;
+        transition: transform 4000ms linear,
+                    left 4000ms linear,
+                    top 4000ms linear
+        transform: rotate(-20deg);
+        animation: fly 4000ms linear infinite;
+      }
+    }
+  }
+}
